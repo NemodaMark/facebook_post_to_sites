@@ -1,10 +1,12 @@
 <?php
+require_once 'config.php';
 
-// Set your Facebook App credentials
-$appId = '917668766733923';
-$appSecret = '7d48f76a8f7aa866b767c193dc2d1de1';
-$pageId = '551065584994104';
-$accessToken = 'EAANCnWjc1mMBO9BHw3wEyQMHOr8FbIGUFHEkdb4MBOONC5DgnFLhduGGhgy5Obdt55PD1CckUJidJPsXhuv1etqoj57Kpv3z4jqnreNJsZAfn2W1LZA1KaLL2WKpnI30rvql2u6F4XNTb4Gcevn1bdBx6uZB1UqXV0zxfHaNiHYo2n6jVsKotFqyBYuZCTMMrBDSZAGoZANayqjwzKvcZCamiovc72032M4cEevqqn1';
+// Use the constants
+$appId = FB_APP_ID;
+$appSecret = FB_APP_SECRET;
+$pageId = FB_PAGE_ID;
+$accessToken = FB_ACCESS_TOKEN;
+
 
 // Make a request to the Facebook Graph API
 $url = "https://graph.facebook.com/v13.0/{$pageId}/posts?fields=message,created_time,permalink_url,full_picture&access_token={$accessToken}";
