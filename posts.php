@@ -4,10 +4,10 @@
 $appId = '917668766733923';
 $appSecret = '7d48f76a8f7aa866b767c193dc2d1de1';
 $pageId = '551065584994104';
-$accessToken = 'EAANCnWjc1mMBOZCUyJZB26SkK0EVoHFRUOPB54o1PnGeRug2nUZAUuzcElacCBfFuSJSKZBFCvDYLmwgTBU7n8zebQflCa2BVI7ZAn6JZA2oTGoTuBkdXLBZC2FJTLTJ09PAmmwMSRYtUVNLCsu9WSZC7dJZAoJeivlWAdVaVzqIOatmv56ZARxWOdOOWZB40EneKnYDQgRghf7Ez34pqHdAqw0B7ZA4GAEYSEc1eEtSB5o7';
+$accessToken = 'EAANCnWjc1mMBO9BHw3wEyQMHOr8FbIGUFHEkdb4MBOONC5DgnFLhduGGhgy5Obdt55PD1CckUJidJPsXhuv1etqoj57Kpv3z4jqnreNJsZAfn2W1LZA1KaLL2WKpnI30rvql2u6F4XNTb4Gcevn1bdBx6uZB1UqXV0zxfHaNiHYo2n6jVsKotFqyBYuZCTMMrBDSZAGoZANayqjwzKvcZCamiovc72032M4cEevqqn1';
 
 // Make a request to the Facebook Graph API
-$url = "https://graph.facebook.com/v13.0/{$pageId}/posts?fields=message,created_time,permalink_url&access_token={$accessToken}";
+$url = "https://graph.facebook.com/v13.0/{$pageId}/posts?fields=message,created_time,permalink_url,full_picture&access_token={$accessToken}";
 
 $response = file_get_contents($url);
 
@@ -31,6 +31,7 @@ if ($response === FALSE) {
                 $postDate = isset($post['created_time']) ? date('Y-m-d H:i:s', strtotime($post['created_time'])) : 'Unknown';
                 $postContent = isset($post['message']) ? $post['message'] : 'No content available';
                 $postLink = isset($post['permalink_url']) ? $post['permalink_url'] : '#';
+                $postPic = isset($post['full_picture']) ? $post['full_picture'] : 'holder.png'; // Use 'holder.png' if no picture available
 
                 // Display each post
                 echo "<div class='card bg-primary text-light mx-5 my-5' style='width: 18rem;'>
@@ -44,6 +45,9 @@ if ($response === FALSE) {
                             </h5>
                             <h6 class='card-subtitle mb-2 text-light'>$postDate</h6>
                             <p class='card-text'>$postContent</p>
+                            <div class='image-container' style='position: relative; overflow: hidden; padding-top: 56.25%;'>
+                                <img src='$postPic' alt='Post Image' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;'>
+                            </div>
                             <a href='$postLink' class='card-link text-light'>Post Link</a>
                             <a href='https://www.facebook.com/profile.php?id=100066156733639&locale=hu_HU' class='card-link text-light'>facebook page</a>
                         </div>
